@@ -5,9 +5,10 @@ com o banco
 de dados*/
 $servername = "localhost";
 //você deu nome ao banco de dados
-$database = ""; //func2c ou func2d
+$database = "func2c"; //func2c ou func2d
 $username = "root";
 $password = "";
+
 
 $conexao = mysqli_connect(
     $servername, $username, 
@@ -41,7 +42,7 @@ if(!empty($sql)){
     }
 }
 
-//echo $id." ".$nome." ".$cpf." ".$botao;
+
 
 
 
@@ -58,5 +59,25 @@ if(!empty($sql)){
         <input type ="submit" name = "botao" value = "Cadastrar" />
         <input type ="reset" name = "botao" value = "cancelar" />
     </form>
+    <table> 
+        <tr>
+            <td>-</td><td> ID</td> <td>Nome </td><td><td>CPF</td>
+        </tr>
+        <?php
+        $sql_mostra-cad = "SELECT * FROM funcionarios ORDER BY id desc limit 0,10";
+        $resultado = mysqli_query($conexao, $sql_mostra_cad);
+
+        while($linha = mysqli_fetch_assoc($resultado)){
+        echo "
+         <tr>
+            <td> <a href = '?id=".$linha["id"]."'>Selecionar</a>
+             </td>
+            <td>".$linha["Nome"]."</td>
+            <td>".$linha["CPF"]."</td><td>
+         </tr>
+         ";
+        }
+        ?>
+    </table>
     </body>
 </html>
